@@ -1,0 +1,35 @@
+{
+  "name": "MyBridgesApp",
+  "version": "0.1.0",
+  "description": "Auto-generated Bridges Node.js application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bridges-console": "^1.0.0",
+    "pg": "^4.1.0",
+    "sequelize": "^2.0.0-rc3",
+    "sqlite3": "^3.0.4",
+    "winston": "^0.8.3",
+    "nconf": "^0.7.1",
+    "express": "^4.10.5",
+    "body-parser": "^1.10.0",
+    "lodash": "^2.4.1",
+    "promise": "^6.0.1",
+    "passport": "^0.2.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.10",
+    "gulp-6to5": "^1.0.2",
+    "chai": "^1.10.0",
+    "sinon": "^1.12.1",
+    "supertest": "^0.15.0",
+    "mocha": "^2.0.1",
+    "jshint": "^2.5.10",
+    "istanbul": "^0.3.5",
+    "coveralls": "^2.11.2"
+  }
+}

@@ -4,8 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "new": "node new.js",
+    "console": "node console.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "bin": {
+    "bridges": "./index"
+  },
   "author": "Steven Zeiler",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^2.5.0",
+    "bridges-console": "^1.0.0"
+  }
 }
