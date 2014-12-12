@@ -1,0 +1,57 @@
+#!/usr/local/bin/node
+var fs = require('fs');
+
+var program = require('commander');
+var Console = require('bridges-console');
+var spawn = require('child_process').spawn;
+var ModelGenerator = require(__dirname+'/../src/generators/model_generator.js');
+var ApplicationGenerator = require(__dirname+'/../src/generators/application_generator.js');
+
+program
+  .version('0.1.1')
+  .option('-d, --database', 'database')
+
+program
+  .command('generate <generator> <name>')
+  .action(function(generator, name) {
+    switch(generator) {
+      case 'model':
+        var modelGenerator = new ModelGenerator(name);
+        modelGenerator.run();
+        break;
+      default:
+        console.log('unsupported generator type', type);
+    }
+  });
+
+program
+  .command('new <name>')
+  .action(function(name) {
+    var applicationGenerator = new ApplicationGenerator(name);
+    applicationGenerator.run();
+  });
+
+program
+  .command('console')
+  .action(function() {
+    var path = process.cwd()+'/config/bridges.js';
+    if (fs.existsSync(path) && fs.statSync(path).isFile()){
+      var repl = new Console({
+        prompt: 'bridges console',
+        loadDirectories: [
+          process.cwd()+'/app/models',
+          process.cwd()+'/app/lib'
+        ]
+      }); 
+      repl.start();
+    } else {
+      console.log('current directory is not a Bridges application');
+    }
+  });
+
+function copy(source, destination) {
+  fs.createReadStream(source).pipe(fs.createWriteStream(destination));
+}
+
+program.parse(process.argv);
+

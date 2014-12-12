@@ -1,6 +1,6 @@
 {
   "name": "MyBridgesApp",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Auto-generated Bridges Node.js application",
   "main": "index.js",
   "scripts": {
@@ -17,9 +17,10 @@
     "passport": "^0.2.1",
     "pg": "^4.1.0",
     "promise": "^6.0.1",
-    "sequelize": "^2.0.0-rc3",
     "sqlite3": "^3.0.4",
-    "winston": "^0.8.3"
+    "winston": "^0.8.3",
+    "bookshelf": "^0.7.9",
+    "knex": "^0.7.3"
   },
   "devDependencies": {
     "gulp": "^3.8.10",
@@ -30,6 +31,8 @@
     "mocha": "^2.0.1",
     "jshint": "^2.5.10",
     "istanbul": "^0.3.5",
-    "coveralls": "^2.11.2"
+    "coveralls": "^2.11.2",
+    "gulp-jshint": "^1.9.0",
+    "gulp-uglify": "^1.0.2"
   }
 }
