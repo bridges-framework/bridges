@@ -32,15 +32,27 @@ program
   });
 
 program
+  .command('test')
+  .action(function() {
+    var test = spawn('npm', ['test']);
+    test.stdout.pipe(process.stdout);
+    test.stderr.pipe(process.stdout);
+    test.on('close', function(code) {
+      console.log('Test run complete');
+      process.exit(0);
+    });
+  });
+
+program
   .command('console')
   .action(function() {
-    var path = process.cwd()+'/config/bridges.js';
+    var path = process.cwd()+'/source/config/bridges.js';
     if (fs.existsSync(path) && fs.statSync(path).isFile()){
       var repl = new Console({
         prompt: 'bridges console',
         loadDirectories: [
-          process.cwd()+'/app/models',
-          process.cwd()+'/app/lib'
+          process.cwd()+'/build/app/models',
+          process.cwd()+'/build/app/lib'
         ]
       }); 
       repl.start();

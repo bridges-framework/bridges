@@ -4,11 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "new": "node new.js",
-    "console": "node console.js",
-    "generate": "node generate.js",
-    "g": "node generate.js",
-    "db-migrate": "node migrate.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
