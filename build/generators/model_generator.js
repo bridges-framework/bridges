@@ -22,22 +22,21 @@ var ModelGenerator = (function (GeneratorBase) {
 
   _extends(ModelGenerator, GeneratorBase);
 
-  ModelGenerator.prototype.run = function () {
-    var modelPath = process.cwd() + "/app/models/" + this.name + ".js";
+  ModelGenerator.prototype.run = function (name) {
+    var modelPath = "/source/app/models/" + name + ".js";
+    var migrationPath = "/source/db/migrations/" + this.timestamp(name) + ".js";
 
     if (fs.existsSync(modelPath)) {
-      console.log("Error: Model named " + this.name + " already exists at ", modelPath);
+      console.log("Error: Model named " + name + " already exists at ", modelPath);
     } else {
-      this.copy(__dirname + "/../templates/model.js", modelPath);
-      console.log("create", modelPath);
-      var migrationPath = process.cwd() + "/db/migrations/" + (new Date()).getTime() + "-" + this.name + ".js";
-      this.copy(__dirname + "/../templates/migration.js", migrationPath);
-      console.log("create", migrationPath);
-
-      var modelTestPath = process.cwd() + "/test/models/" + this.name + "_test.js";
-      this.copy(__dirname + "/../templates/model_test.js", modelTestPath);
-      console.log("create", modelTestPath);
+      this.template("/model.js", modelPath)();
+      this.template("/migration.js", migrationPath)();
+      this.template("/model_test.js", "/source/test/models/" + name + "_test.js")();
     }
+  };
+
+  ModelGenerator.prototype.timestamp = function (name) {
+    return (new Date()).getTime() + "-" + name;
   };
 
   return ModelGenerator;

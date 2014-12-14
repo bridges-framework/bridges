@@ -1,6 +1,6 @@
-var Bridges = require('bridges');
+var Application = require('bridges').Application;
 
-module.exports = new Bridges.Application('MyAppName', function(app) {
+var app = new Application();
 
-});
+app.start();
 

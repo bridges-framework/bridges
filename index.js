@@ -6,6 +6,7 @@ var Console = require('bridges-console');
 var spawn = require('child_process').spawn;
 var ModelGenerator = require(__dirname+'/build/generators/model_generator.js');
 var ApplicationGenerator = require(__dirname+'/build/generators/application_generator.js');
+var ControllerGenerator = require(__dirname+'/build/generators/controller_generator.js');
 
 program
   .version('0.1.1')
@@ -18,6 +19,10 @@ program
       case 'model':
         var modelGenerator = new ModelGenerator(process.cwd());
         modelGenerator.run(name);
+        break;
+      case 'controller':
+        var controllerGenerator = new ControllerGenerator(process.cwd());
+        controllerGenerator.run(name);
         break;
       default:
         console.log('unsupported generator type:', type);
@@ -48,14 +53,19 @@ program
   .action(function() {
     var path = process.cwd()+'/source/config/bridges.js';
     if (fs.existsSync(path) && fs.statSync(path).isFile()){
-      var repl = new Console({
-        prompt: 'bridges console',
-        loadDirectories: [
-          process.cwd()+'/build/app/models',
-          process.cwd()+'/build/app/lib'
-        ]
-      }); 
-      repl.start();
+      var build = spawn('npm', ['run', 'build']);
+      build.stdout.pipe(process.stdout);
+      build.stderr.pipe(process.stdout);
+      build.on('close', function(code) {
+        var repl = new Console({
+          prompt: 'bridges console',
+          loadDirectories: [
+            process.cwd()+'/build/app/models',
+            process.cwd()+'/build/app/lib'
+          ]
+        }); 
+        repl.start();
+      });
     } else {
       console.log('current directory is not a Bridges application');
     }

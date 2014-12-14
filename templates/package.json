@@ -5,12 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "npm run build && mocha -R spec test/",
+    "start": "npm run build && node build/config/bridges.js",
     "build": "gulp"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bridges": "0.0.1",
+    "bridges": "0.3.0",
     "body-parser": "^1.10.0",
     "express": "^4.10.5",
     "lodash": "^2.4.1",
@@ -21,10 +22,10 @@
     "sqlite3": "^3.0.4",
     "winston": "^0.8.3",
     "bookshelf": "^0.7.9",
-    "knex": "^0.7.3"
+    "knex": "^0.7.3",
+    "gulp": "^3.8.10"
   },
   "devDependencies": {
-    "gulp": "^3.8.10",
     "gulp-6to5": "^1.0.2",
     "chai": "^1.10.0",
     "sinon": "^1.12.1",

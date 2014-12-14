@@ -37,9 +37,12 @@ var ApplicationGenerator = (function (GeneratorBase) {
     this.directory("/source/app/controllers");
     this.directory("/source/config");
     this.directory("/source/config/initializers");
-    this.file("/config/bridges.js");
-    this.copy(__dirname + "/../../templates/package.json", this.projectPath + "/package.json");
-    this.copy(__dirname + "/../../templates/.gitignore", this.projectPath + "/.gitignore");
+    this.template("/config/bridges.js", "/source/config/bridges.js")();
+    this.template("/config/database.js", "/source/config/database.js")();
+    this.template("/config/routes.js", "/source/config/routes.js")();
+    this.template("/package.json", "/package.json")();
+    this.template("/gulpfile.js", "/gulpfile.js")();
+    this.template("/.gitignore", "/gitiginore")();
     this.install();
   };
 

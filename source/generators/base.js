@@ -24,8 +24,12 @@ class Generator {
     console.log('mkdir', path);
   }
 
-  file(path) {
-    this.copy(this.source+path, this.target+path);
+  template(source, target) {
+    var _this = this;
+    return function(params) {
+      _this.copy(__dirname+'/../../templates'+source, _this.projectPath+target);
+      console.log('template', target);
+    }
   }
 
   copy(source, target) {

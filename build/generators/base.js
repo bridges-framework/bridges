@@ -19,8 +19,12 @@ var Generator = (function () {
     console.log("mkdir", path);
   };
 
-  Generator.prototype.file = function (path) {
-    this.copy(this.source + path, this.target + path);
+  Generator.prototype.template = function (source, target) {
+    var _this = this;
+    return function (params) {
+      _this.copy(__dirname + "/../../templates" + source, _this.projectPath + target);
+      console.log("template", target);
+    };
   };
 
   Generator.prototype.copy = function (source, target) {
