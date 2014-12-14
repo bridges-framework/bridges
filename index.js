@@ -4,12 +4,25 @@ var fs = require('fs');
 var program = require('commander');
 var Console = require('bridges-console');
 var spawn = require('child_process').spawn;
-var ModelGenerator = require(__dirname+'/../src/generators/model_generator.js');
-var ApplicationGenerator = require(__dirname+'/../src/generators/application_generator.js');
+var ModelGenerator = require(__dirname+'/source/generators/model_generator.js');
+var ApplicationGenerator = require(__dirname+'/source/generators/application_generator.js');
 
 program
   .version('0.1.1')
   .option('-d, --database', 'database')
+
+program
+  .command('start')
+  .action(function() {
+    spawn('npm run start')
+    application.stdout.pipe(process.stdout);
+    application.stderr.pipe(process.stdout);
+    application.on('close', function(code) {
+      console.log('Test run complete');
+      process.exit(0);
+    });
+    
+  });
 
 program
   .command('generate <generator> <name>')
@@ -32,13 +45,13 @@ program
   });
 
 program
-  .command('test')
+  .command('application')
   .action(function() {
-    var test = spawn('npm', ['test']);
-    test.stdout.pipe(process.stdout);
-    test.stderr.pipe(process.stdout);
-    test.on('close', function(code) {
-      console.log('Test run complete');
+    var application = spawn('npm', ['run', 'start']);
+    application.stdout.pipe(process.stdout);
+    application.stderr.pipe(process.stdout);
+    application.on('close', function(code) {
+      console.log('Bridges Application Stopping...');
       process.exit(0);
     });
   });
@@ -60,10 +73,6 @@ program
       console.log('current directory is not a Bridges application');
     }
   });
-
-function copy(source, destination) {
-  fs.createReadStream(source).pipe(fs.createWriteStream(destination));
-}
 
 program.parse(process.argv);
 

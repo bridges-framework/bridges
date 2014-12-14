@@ -1,24 +1,28 @@
 {
   "name": "bridges",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "",
-  "main": "index.js",
+  "main": "./build/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "gulp"
   },
   "bin": {
-    "bridges": "./build/bridges"
+    "bridges": "./index.js"
   },
   "author": "Steven Zeiler",
   "license": "ISC",
   "dependencies": {
     "commander": "^2.5.0",
-    "bridges-console": "^1.0.0"
+    "bridges-console": "^1.0.0",
+    "body-parser": "^1.10.0",
+    "express": "^4.10.6"
   },
   "devDependencies": {
     "gulp-concat": "^2.4.2",
     "gulp-jshint": "^1.9.0",
     "gulp": "^3.8.10",
-    "gulp-uglify": "^1.0.2"
+    "gulp-uglify": "^1.0.2",
+    "gulp-6to5": "^1.0.2"
   }
 }
