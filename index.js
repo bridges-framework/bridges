@@ -4,25 +4,12 @@ var fs = require('fs');
 var program = require('commander');
 var Console = require('bridges-console');
 var spawn = require('child_process').spawn;
-var ModelGenerator = require(__dirname+'/source/generators/model_generator.js');
-var ApplicationGenerator = require(__dirname+'/source/generators/application_generator.js');
+var ModelGenerator = require(__dirname+'/build/generators/model_generator.js');
+var ApplicationGenerator = require(__dirname+'/build/generators/application_generator.js');
 
 program
   .version('0.1.1')
   .option('-d, --database', 'database')
-
-program
-  .command('start')
-  .action(function() {
-    spawn('npm run start')
-    application.stdout.pipe(process.stdout);
-    application.stderr.pipe(process.stdout);
-    application.on('close', function(code) {
-      console.log('Test run complete');
-      process.exit(0);
-    });
-    
-  });
 
 program
   .command('generate <generator> <name>')
@@ -45,7 +32,7 @@ program
   });
 
 program
-  .command('application')
+  .command('start')
   .action(function() {
     var application = spawn('npm', ['run', 'start']);
     application.stdout.pipe(process.stdout);

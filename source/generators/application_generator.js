@@ -1,7 +1,7 @@
-var Generator = require(__dirname+'/');
+var GeneratorBase = require(__dirname+'/base');
 var spawn = require('child_process').spawn;
 
-class ApplicationGenerator extends Generator {
+class ApplicationGenerator extends GeneratorBase {
 
   run() {
     console.log('generating bridges app');

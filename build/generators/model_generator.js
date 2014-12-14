@@ -12,15 +12,15 @@ var _extends = function (child, parent) {
   child.__proto__ = parent;
 };
 
-var Generator = require(__dirname + "/");
+var GeneratorBase = require(__dirname + "/base");
 var fs = require("fs");
 
-var ModelGenerator = (function (Generator) {
+var ModelGenerator = (function (GeneratorBase) {
   var ModelGenerator = function ModelGenerator() {
-    Generator.apply(this, arguments);
+    GeneratorBase.apply(this, arguments);
   };
 
-  _extends(ModelGenerator, Generator);
+  _extends(ModelGenerator, GeneratorBase);
 
   ModelGenerator.prototype.run = function () {
     var modelPath = process.cwd() + "/app/models/" + this.name + ".js";
@@ -41,6 +41,6 @@ var ModelGenerator = (function (Generator) {
   };
 
   return ModelGenerator;
-})(Generator);
+})(GeneratorBase);
 
 module.exports = ModelGenerator;

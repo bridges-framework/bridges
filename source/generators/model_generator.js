@@ -1,7 +1,7 @@
-var Generator = require(__dirname+'/');
+var GeneratorBase = require(__dirname+'/base');
 var fs = require('fs');
 
-class ModelGenerator extends Generator {
+class ModelGenerator extends GeneratorBase {
 
   run() {
     var modelPath = process.cwd()+'/app/models/'+this.name+'.js';

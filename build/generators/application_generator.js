@@ -12,15 +12,15 @@ var _extends = function (child, parent) {
   child.__proto__ = parent;
 };
 
-var Generator = require(__dirname + "/");
+var GeneratorBase = require(__dirname + "/base");
 var spawn = require("child_process").spawn;
 
-var ApplicationGenerator = (function (Generator) {
+var ApplicationGenerator = (function (GeneratorBase) {
   var ApplicationGenerator = function ApplicationGenerator() {
-    Generator.apply(this, arguments);
+    GeneratorBase.apply(this, arguments);
   };
 
-  _extends(ApplicationGenerator, Generator);
+  _extends(ApplicationGenerator, GeneratorBase);
 
   ApplicationGenerator.prototype.run = function () {
     console.log("generating bridges app");
@@ -56,6 +56,6 @@ var ApplicationGenerator = (function (Generator) {
   };
 
   return ApplicationGenerator;
-})(Generator);
+})(GeneratorBase);
 
 module.exports = ApplicationGenerator;

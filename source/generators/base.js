@@ -1,5 +1,3 @@
-var fs = require('fs');
-
 class Generator {
   constructor(name) {
     this.name = name;
@@ -16,7 +14,5 @@ class Generator {
   }
 }
 
-module.exports = {
-  Base: Generator
-}
+module.exports = Generator;
 
