@@ -1,37 +1,46 @@
 "use strict";
 
+var _extends = function (child, parent) {
+  child.prototype = Object.create(parent.prototype, {
+    constructor: {
+      value: child,
+      enumerable: false,
+      writable: true,
+      configurable: true
+    }
+  });
+  child.__proto__ = parent;
+};
+
 var Generator = require(__dirname + "/");
 var fs = require("fs");
 
-function ModelGenerator(name) {
-  this.name = name;
-  Generator.Base.call(this, name);
-}
+var ModelGenerator = (function (Generator) {
+  var ModelGenerator = function ModelGenerator() {
+    Generator.apply(this, arguments);
+  };
 
-ModelGenerator.prototype = Object.create(Generator.Base.prototype);
-ModelGenerator.prototype.constructor = ModelGenerator;
+  _extends(ModelGenerator, Generator);
 
-ModelGenerator.prototype.run = function () {
-  var _this = this;
+  ModelGenerator.prototype.run = function () {
+    var modelPath = process.cwd() + "/app/models/" + this.name + ".js";
 
-  var modelPath = process.cwd() + "/app/models/" + _this.name + ".js";
+    if (fs.existsSync(modelPath)) {
+      console.log("Error: Model named " + this.name + " already exists at ", modelPath);
+    } else {
+      this.copy(__dirname + "/../templates/model.js", modelPath);
+      console.log("create", modelPath);
+      var migrationPath = process.cwd() + "/db/migrations/" + (new Date()).getTime() + "-" + this.name + ".js";
+      this.copy(__dirname + "/../templates/migration.js", migrationPath);
+      console.log("create", migrationPath);
 
-  if (fs.existsSync(modelPath)) {
-    console.log("Error: Model named " + _this.name + " already exists at ", modelPath);
-  } else {
-    _this.copy(__dirname + "/../templates/model.js", modelPath);
-    console.log("create", modelPath);
+      var modelTestPath = process.cwd() + "/test/models/" + this.name + "_test.js";
+      this.copy(__dirname + "/../templates/model_test.js", modelTestPath);
+      console.log("create", modelTestPath);
+    }
+  };
 
-    var migrationPath = process.cwd() + "/db/migrations/" + (new Date()).getTime() + "-" + _this.name + ".js";
-    _this.copy(__dirname + "/../templates/migration.js", migrationPath);
-    console.log("create", migrationPath);
-
-    var modelTestPath = process.cwd() + "/test/models/" + _this.name + "_test.js";
-    _this.copy(__dirname + "/../templates/model_test.js", modelTestPath);
-    console.log("create", modelTestPath);
-  }
-};
-
-ModelGenerator.constructor = ModelGenerator;
+  return ModelGenerator;
+})(Generator);
 
 module.exports = ModelGenerator;

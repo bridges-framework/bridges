@@ -2,12 +2,9 @@ var express = require('express');
 var bodyParser = require('body-parser');
 
 class Server {
-  constructor() {
+  constructor(routes) {
     this._app = express();
-  }
-
-  use(router) {
-    this._app.use('/', router);
+    this._app.use('/', routes.router);
   }
 
   start() {

@@ -1,11 +1,19 @@
 var fs = require('fs');
 
-function Generator(name) {
-  this.name = name; 
-}
+class Generator {
+  constructor(name) {
+    this.name = name;
+  }
 
-Generator.prototype.copy = function copy(source, destination) {
-  fs.createReadStream(source).pipe(fs.createWriteStream(destination));
+  directory(path) {
+    var projectDirectory = process.cwd()+'/'+this.name;
+    console.log('mkdir', this.name);
+  }
+
+  file(path) {
+    this.copy(__dirname+'/../templates/'+path, process.pwd()+this.name+path);
+    console.log('create', this.name+path);
+  }
 }
 
 module.exports = {

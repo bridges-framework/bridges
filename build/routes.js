@@ -3,20 +3,25 @@
 var express = require("express");
 var requireAll = require("require-all-to-camel");
 var controllers = requireAll(process.cwd() + "/build/app/controllers");
-
 var Routes = (function () {
   var Routes = function Routes() {
     this.router = new express.Router();
   };
 
-  Routes.draw = function (drawing) {
-    return new Routes();
+  Routes.draw = function (connect) {
+    var routes = new Routes();
+    connect.apply(routes);
+    return routes;
   };
 
   Routes.prototype.action = function (action) {
-    var controller = action.split("#")[0];
-    var action = action.split("#")[1];
-    return controllers[controller][action];
+    var controllerName = action.split("#")[0] + "Controller";
+    var actionName = action.split("#")[1];
+
+    return function (request, response, error) {
+      var controller = new controllers[controllerName](request, response, error);
+      controller[actionName]();
+    };
   };
 
   Routes.prototype.get = function (route, action) {

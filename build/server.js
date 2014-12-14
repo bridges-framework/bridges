@@ -4,12 +4,9 @@ var express = require("express");
 var bodyParser = require("body-parser");
 
 var Server = (function () {
-  var Server = function Server() {
+  var Server = function Server(routes) {
     this._app = express();
-  };
-
-  Server.prototype.use = function (router) {
-    this._app.use("/", router);
+    this._app.use("/", routes.router);
   };
 
   Server.prototype.start = function () {

@@ -2,13 +2,23 @@
 
 var fs = require("fs");
 
-function Generator(name) {
-  this.name = name;
-}
+var Generator = (function () {
+  var Generator = function Generator(name) {
+    this.name = name;
+  };
 
-Generator.prototype.copy = function copy(source, destination) {
-  fs.createReadStream(source).pipe(fs.createWriteStream(destination));
-};
+  Generator.prototype.directory = function (path) {
+    var projectDirectory = process.cwd() + "/" + this.name;
+    console.log("mkdir", this.name);
+  };
+
+  Generator.prototype.file = function (path) {
+    this.copy(__dirname + "/../templates/" + path, process.pwd() + this.name + path);
+    console.log("create", this.name + path);
+  };
+
+  return Generator;
+})();
 
 module.exports = {
   Base: Generator
