@@ -35,6 +35,7 @@ var ApplicationGenerator = (function (GeneratorBase) {
     this.directory("/source/app/models");
     this.directory("/source/app/lib");
     this.directory("/source/app/controllers");
+    this.template("/application_controller.js", "/source/app/controllers/application_controller.js")();
     this.directory("/source/config");
     this.directory("/source/config/initializers");
     this.template("/config/bridges.js", "/source/config/bridges.js")();
