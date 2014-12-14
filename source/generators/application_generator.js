@@ -5,28 +5,30 @@ class ApplicationGenerator extends GeneratorBase {
 
   run() {
     console.log('generating bridges app');
-    this.directory('');
-    this.directory('/db');
-    this.directory('/db/migrations');
-    this.directory('/test');
-    this.directory('/test/models');
-    this.directory('/test/integration');
-    this.directory('/app');
-    this.directory('/app/models');
-    this.directory('/app/lib');
-    this.directory('/app/controllers');
-    this.directory('/config');
-    this.directory('/config/initializers');
+    this.directory('/');
+    this.directory('/source');
+    this.directory('/source/db');
+    this.directory('/source/db/migrations');
+    this.directory('/source/test');
+    this.directory('/source/test/models');
+    this.directory('/source/test/integration');
+    this.directory('/source/app');
+    this.directory('/source/app/models');
+    this.directory('/source/app/lib');
+    this.directory('/source/app/controllers');
+    this.directory('/source/config');
+    this.directory('/source/config/initializers');
     this.file('/config/bridges.js');
-    this.file('/package.json');
-    this.file('/.gitignore');
+    this.copy(__dirname+'/../../templates/package.json', this.projectPath+'/package.json');
+    this.copy(__dirname+'/../../templates/.gitignore', this.projectPath+'/.gitignore');
     this.install();
   }
   
   install() {
+    var _this = this;
     console.log('Running npm install...');
     setTimeout(function() {
-      var install = spawn('npm', ['install'], {cwd: projectDirectory});
+      var install = spawn('npm', ['install'], {cwd: _this.projectPath});
       install.stdout.pipe(process.stdout);
       install.stderr.pipe(process.stdout);
       install.on('close', function(code) {

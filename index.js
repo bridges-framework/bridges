@@ -16,18 +16,18 @@ program
   .action(function(generator, name) {
     switch(generator) {
       case 'model':
-        var modelGenerator = new ModelGenerator(name);
-        modelGenerator.run();
+        var modelGenerator = new ModelGenerator(process.cwd());
+        modelGenerator.run(name);
         break;
       default:
-        console.log('unsupported generator type', type);
+        console.log('unsupported generator type:', type);
     }
   });
 
 program
   .command('new <name>')
   .action(function(name) {
-    var applicationGenerator = new ApplicationGenerator(name);
+    var applicationGenerator = new ApplicationGenerator(process.cwd()+'/'+name);
     applicationGenerator.run();
   });
 
