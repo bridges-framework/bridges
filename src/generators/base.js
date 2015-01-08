@@ -3,7 +3,7 @@ var fs = require('fs');
 class Generator {
   constructor(projectPath) {
     this._source = __dirname+'/../../templates';
-    this._target = projectPath+'/source';
+    this._target = projectPath+'/src';
     this._projectPath = projectPath;
   }
 

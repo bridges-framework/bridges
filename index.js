@@ -51,7 +51,7 @@ program
 program
   .command('console')
   .action(function() {
-    var path = process.cwd()+'/source/config/bridges.js';
+    var path = process.cwd()+'/src/config/bridges.js';
     if (fs.existsSync(path) && fs.statSync(path).isFile()){
       var build = spawn('npm', ['run', 'build']);
       build.stdout.pipe(process.stdout);

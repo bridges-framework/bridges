@@ -5,25 +5,27 @@
   "main": "index.js",
   "scripts": {
     "test": "npm run build && mocha -R spec test/",
-    "start": "npm run build && node build/config/bridges.js",
+    "start": "npm run build && node build/bridges",
     "build": "gulp"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bridges": "0.3.0",
     "body-parser": "^1.10.0",
+    "bookshelf": "^0.7.9",
+    "bridges": "0.3.0",
+    "bridges-application": "^0.2.1",
+    "bridges-express": "^0.1.0",
     "express": "^4.10.5",
+    "gulp": "^3.8.10",
+    "knex": "^0.7.3",
     "lodash": "^2.4.1",
     "nconf": "^0.7.1",
     "passport": "^0.2.1",
     "pg": "^4.1.0",
     "promise": "^6.0.1",
     "sqlite3": "^3.0.4",
-    "winston": "^0.8.3",
-    "bookshelf": "^0.7.9",
-    "knex": "^0.7.3",
-    "gulp": "^3.8.10"
+    "winston": "^0.8.3"
   },
   "devDependencies": {
     "gulp-6to5": "^1.0.2",
@@ -38,3 +40,4 @@
     "gulp-uglify": "^1.0.2"
   }
 }
+

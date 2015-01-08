@@ -10,7 +10,7 @@ var fs = require("fs");
 var Generator = (function () {
   var Generator = function Generator(projectPath) {
     this._source = __dirname + "/../../templates";
-    this._target = projectPath + "/source";
+    this._target = projectPath + "/src";
     this._projectPath = projectPath;
   };
 

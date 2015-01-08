@@ -25,25 +25,37 @@ var ApplicationGenerator = (function (GeneratorBase) {
   ApplicationGenerator.prototype.run = function () {
     console.log("generating bridges app");
     this.directory("/");
-    this.directory("/source");
-    this.directory("/source/db");
-    this.directory("/source/db/migrations");
-    this.directory("/source/test");
-    this.directory("/source/test/models");
-    this.directory("/source/test/integration");
-    this.directory("/source/app");
-    this.directory("/source/app/models");
-    this.directory("/source/app/lib");
-    this.directory("/source/app/controllers");
-    this.template("/application_controller.js", "/source/app/controllers/application_controller.js")();
-    this.directory("/source/config");
-    this.directory("/source/config/initializers");
-    this.template("/config/bridges.js", "/source/config/bridges.js")();
-    this.template("/config/database.js", "/source/config/database.js")();
-    this.template("/config/routes.js", "/source/config/routes.js")();
+    this.directory("/src");
+    this.template("/bridges.js", "/src/bridges.js")();
     this.template("/package.json", "/package.json")();
     this.template("/gulpfile.js", "/gulpfile.js")();
-    this.template("/.gitignore", "/gitiginore")();
+    this.template("/.gitignore", "/.gitiginore")();
+
+    this.directory("/src/db");
+    this.directory("/src/db/migrations");
+
+    this.directory("/src/test");
+    this.directory("/src/test/models");
+    this.directory("/src/test/integration");
+
+    this.directory("/src/models");
+    this.template("/models/index.js", "/src/models/index.js")();
+
+    this.directory("/src/lib");
+    this.template("/lib/index.js", "/src/lib/index.js")();
+
+    this.directory("/src/controllers");
+    this.template("/controllers/home.js", "/src/controllers/home.js")();
+
+    this.directory("/src/processes");
+    this.template("/processes/server.js", "/src/processes/server.js")();
+
+    this.directory("/src/config");
+    this.directory("/src/config/initializers");
+
+    this.template("/config/database.js", "/src/config/database.js")();
+    this.template("/config/routes.js", "/src/config/routes.js")();
+
     this.install();
   };
 
