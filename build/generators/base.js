@@ -22,8 +22,12 @@ var Generator = (function () {
   Generator.prototype.template = function (source, target) {
     var _this = this;
     return function (params) {
-      _this.copy(__dirname + "/../../templates" + source, _this.projectPath + target);
-      console.log("template", target);
+      try {
+        _this.copy(__dirname + "/../../templates" + source, _this.projectPath + target);
+        console.log("template", target);
+      } catch (error) {
+        console.log("error", error);
+      }
     };
   };
 

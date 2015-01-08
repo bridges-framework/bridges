@@ -10,7 +10,7 @@ class ApplicationGenerator extends GeneratorBase {
     this.template('/bridges.js',   '/src/bridges.js')();
     this.template('/package.json', '/package.json')();
     this.template('/gulpfile.js',  '/gulpfile.js')();
-    this.template('/.gitignore',   '/.gitiginore')();
+    this.template('/gitignore',   '/.gitignore')();
 
     this.directory('/src/db');
     this.directory('/src/db/migrations');
