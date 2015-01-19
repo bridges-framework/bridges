@@ -51,6 +51,7 @@ var ApplicationGenerator = (function (GeneratorBase) {
     this.template("/processes/server.js", "/src/processes/server.js")();
 
     this.directory("/src/config");
+    this.template("/knexfile.js", "/src/config/knexfile.js")();
     this.directory("/src/config/initializers");
 
     this.template("/config/database.js", "/src/config/database.js")();
