@@ -1,12 +1,13 @@
 {
-  "name": "MyBridgesApp",
-  "version": "0.1.1",
+  "name": "my-bridges-app",
+  "version": "0.2.0",
   "description": "Auto-generated Bridges Node.js application",
-  "main": "index.js",
+  "main": "build/index.js",
   "scripts": {
-    "test": "npm run build && mocha -R spec test/",
-    "start": "npm run build && node build/bridges",
-    "build": "gulp"
+    "build"      : "gulp",
+    "test"       : "npm run build && mocha -R spec build/test/**/*.js",
+    "start"      : "node build/bridges",
+    "preinstall" : "npm run build"
   },
   "author": "",
   "license": "ISC",
