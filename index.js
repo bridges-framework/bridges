@@ -9,7 +9,7 @@ var ApplicationGenerator = require(__dirname+'/build/generators/application_gene
 var ControllerGenerator = require(__dirname+'/build/generators/controller_generator.js');
 
 program
-  .version('0.4.3')
+  .version(require('./package.json').version)
   .option('-d, --database', 'database')
 
 program
