@@ -3,7 +3,6 @@ var fs = require('fs');
 class Generator {
   constructor(projectPath) {
     this._source = __dirname+'/../../templates';
-    this._target = projectPath+'/src';
     this._projectPath = projectPath;
   }
 
@@ -11,17 +10,13 @@ class Generator {
     return this._source; 
   }
 
-  get target() {
-    return this._target;
-  }
-
   get projectPath() {
     return this._projectPath;
   }
 
   directory(path) {
-    fs.mkdirSync(this.projectPath+path)
     console.log('mkdir', path);
+    fs.mkdirSync(this.projectPath+path)
   }
 
   template(source, target) {

@@ -1,78 +1,79 @@
-"use strict";
+'use strict';
 
-var _extends = function (child, parent) {
-  child.prototype = Object.create(parent.prototype, {
-    constructor: {
-      value: child,
-      enumerable: false,
-      writable: true,
-      configurable: true
+var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _inherits = function (subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
+
+var GeneratorBase = require(__dirname + '/base');
+var spawn = require('child_process').spawn;
+
+var ApplicationGenerator = (function (_GeneratorBase) {
+  function ApplicationGenerator() {
+    _classCallCheck(this, ApplicationGenerator);
+
+    if (_GeneratorBase != null) {
+      _GeneratorBase.apply(this, arguments);
     }
-  });
-  child.__proto__ = parent;
-};
+  }
 
-var GeneratorBase = require(__dirname + "/base");
-var spawn = require("child_process").spawn;
+  _inherits(ApplicationGenerator, _GeneratorBase);
 
-var ApplicationGenerator = (function (GeneratorBase) {
-  var ApplicationGenerator = function ApplicationGenerator() {
-    GeneratorBase.apply(this, arguments);
-  };
+  _createClass(ApplicationGenerator, [{
+    key: 'run',
+    value: function run() {
+      console.log('generating bridges app');
+      this.directory('/');
+      this.template('/package.json', '/package.json')();
+      this.template('/README.md', '/README.md')();
+      this.template('/gitignore', '/.gitignore')();
 
-  _extends(ApplicationGenerator, GeneratorBase);
+      this.directory('/db');
+      this.directory('/db/migrations');
 
-  ApplicationGenerator.prototype.run = function () {
-    console.log("generating bridges app");
-    this.directory("/");
-    this.directory("/src");
-    this.template("/bridges.js", "/src/bridges.js")();
-    this.template("/package.json", "/package.json")();
-    this.template("/gulpfile.js", "/gulpfile.js")();
-    this.template("/gitignore", "/.gitignore")();
+      this.directory('/test');
+      this.directory('/test/models');
+      this.directory('/test/integration');
 
-    this.directory("/src/db");
-    this.directory("/src/db/migrations");
+      this.directory('/models');
+      this.template('/models/index.js', '/models/index.js')();
 
-    this.directory("/src/test");
-    this.directory("/src/test/models");
-    this.directory("/src/test/integration");
+      this.directory('/lib');
+      this.template('/lib/index.js', '/lib/index.js')();
 
-    this.directory("/src/models");
-    this.template("/models/index.js", "/src/models/index.js")();
+      this.directory('/controllers');
+      this.template('/controllers/home.js', '/controllers/home.js')();
 
-    this.directory("/src/lib");
-    this.template("/lib/index.js", "/src/lib/index.js")();
+      this.directory('/processes');
+      this.template('/processes/server.js', '/processes/server.js')();
 
-    this.directory("/src/controllers");
-    this.template("/controllers/home.js", "/src/controllers/home.js")();
+      this.directory('/config');
+      this.template('/knexfile.js', '/config/knexfile.js')();
+      this.directory('/config/initializers');
 
-    this.directory("/src/processes");
-    this.template("/processes/server.js", "/src/processes/server.js")();
+      this.template('/config/database.js', '/config/database.js')();
+      this.template('/config/routes.js', '/config/routes.js')();
+      this.template('/config/bridges.js', '/config/bridges.js')();
 
-    this.directory("/src/config");
-    this.template("/knexfile.js", "/src/config/knexfile.js")();
-    this.directory("/src/config/initializers");
-
-    this.template("/config/database.js", "/src/config/database.js")();
-    this.template("/config/routes.js", "/src/config/routes.js")();
-
-    this.install();
-  };
-
-  ApplicationGenerator.prototype.install = function () {
-    var _this = this;
-    console.log("Running npm install...");
-    setTimeout(function () {
-      var install = spawn("npm", ["install"], { cwd: _this.projectPath });
-      install.stdout.pipe(process.stdout);
-      install.stderr.pipe(process.stdout);
-      install.on("close", function (code) {
-        console.log("Installation complete");
-        process.exit(0);
-      });
-    }, 1000);
-  };
+      this.install();
+    }
+  }, {
+    key: 'install',
+    value: function install() {
+      var _this = this;
+      console.log('Running npm install...');
+      setTimeout(function () {
+        var install = spawn('npm', ['install'], { cwd: _this.projectPath });
+        install.stdout.pipe(process.stdout);
+        install.stderr.pipe(process.stdout);
+        install.on('close', function (code) {
+          console.log('Installation complete');
+          process.exit(0);
+        });
+      }, 1000);
+    }
+  }]);
 
   return ApplicationGenerator;
 })(GeneratorBase);

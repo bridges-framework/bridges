@@ -1,10 +1,12 @@
+require("babel/polyfill");
+
 var Application = require('bridges-application')
 var path        = require('path')
-var models      = require(path.join(__dirname, 'models'))
-var lib         = require(path.join(__dirname, 'lib'))
+var models      = require('../models')
+var lib         = require('../lib')
 
 var application = new Application({
-  directory : __dirname,
+  directory : path.join(__dirname, '..'),
   processes : {
     inject: [models, lib]
   }

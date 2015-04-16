@@ -1,24 +1,21 @@
 {
   "name": "my-bridges-app",
-  "version": "0.2.0",
+  "version": "0.1.0",
   "description": "Auto-generated Bridges Node.js application",
-  "main": "build/index.js",
   "scripts": {
-    "build"      : "gulp",
-    "test"       : "npm run build && mocha -R spec build/test/**/*.js",
-    "start"      : "node build/bridges",
-    "preinstall" : "npm run build"
+    "test": "mocha --compilers js:babel/register test/**/*.js",
+    "start": "babel-node config/bridges.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "babel": "^5.1.10",
     "body-parser": "^1.10.0",
     "bookshelf": "^0.7.9",
     "bridges": "0.3.0",
     "bridges-application": "^0.2.1",
     "bridges-express": "^0.3.1",
     "express": "^4.10.5",
-    "gulp": "^3.8.10",
     "knex": "^0.7.3",
     "lodash": "^2.4.1",
     "nconf": "^0.7.1",
@@ -29,16 +26,12 @@
     "winston": "^0.8.3"
   },
   "devDependencies": {
-    "gulp-6to5": "^1.0.2",
     "chai": "^1.10.0",
     "sinon": "^1.12.1",
     "supertest": "^0.15.0",
     "mocha": "^2.0.1",
     "jshint": "^2.5.10",
     "istanbul": "^0.3.5",
-    "coveralls": "^2.11.2",
-    "gulp-jshint": "^1.9.0",
-    "gulp-uglify": "^1.0.2"
+    "coveralls": "^2.11.2"
   }
 }
-
