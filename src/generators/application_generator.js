@@ -18,10 +18,8 @@ class ApplicationGenerator extends GeneratorBase {
     this.directory('/test/integration');
 
     this.directory('/models');
-    this.template('/models/index.js',   '/models/index.js')();
 
     this.directory('/lib');
-    this.template('/lib/index.js',   '/lib/index.js')();
 
     this.directory('/controllers');
     this.template('/controllers/home.js',   '/controllers/home.js')();

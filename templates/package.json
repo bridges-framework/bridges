@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "babel": "^5.1.10",
+    "bluebird": "^2.9.25",
     "body-parser": "^1.10.0",
     "bookshelf": "^0.7.9",
     "bridges": "0.3.0",
@@ -21,7 +22,7 @@
     "nconf": "^0.7.1",
     "passport": "^0.2.1",
     "pg": "^4.1.0",
-    "promise": "^6.0.1",
+    "require-all-to-camel": "^1.0.0",
     "sqlite3": "^3.0.4",
     "winston": "^0.8.3"
   },
